@@ -1,4 +1,9 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ProductAPI.Data;
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ProductAPIContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("ProductAPIContext") ?? throw new InvalidOperationException("Connection string 'ProductAPIContext' not found.")));
 
 // Add services to the container.
 
